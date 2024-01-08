@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c1720dac902117bc1a6d9f23de3ea348",
+    "revision": "af84787dbe9a45eeff5fcbd768fb7b99",
     "url": "/HTML-CSS-Study/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/HTML-CSS-Study/static/css/2.cc82f8aa.chunk.css"
   },
   {
-    "revision": "d14f0d8a55a1e4f7983e",
+    "revision": "a7e0a39f77902c4a1cda",
     "url": "/HTML-CSS-Study/static/css/main.435d5fe5.chunk.css"
   },
   {
@@ -20,15 +20,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/HTML-CSS-Study/static/js/2.445c0d72.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2c0df7b366e2e3a9f42d",
-    "url": "/HTML-CSS-Study/static/js/3.b1c15188.chunk.js"
+    "revision": "e891fd7d3a3fa7de6e68",
+    "url": "/HTML-CSS-Study/static/js/3.0b14b044.chunk.js"
   },
   {
-    "revision": "d14f0d8a55a1e4f7983e",
-    "url": "/HTML-CSS-Study/static/js/main.0a569b16.chunk.js"
+    "revision": "a7e0a39f77902c4a1cda",
+    "url": "/HTML-CSS-Study/static/js/main.98bb5bb2.chunk.js"
   },
   {
-    "revision": "6fc4258eb6aec35c2702",
-    "url": "/HTML-CSS-Study/static/js/runtime-main.cb457fe9.js"
+    "revision": "dd1f6d6666372c78660c",
+    "url": "/HTML-CSS-Study/static/js/runtime-main.3cd73c54.js"
   }
 ]);
