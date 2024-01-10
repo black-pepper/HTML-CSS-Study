@@ -19,6 +19,7 @@ const ElementList = () => {
 
     return (
         <div class="list-group" style={{margin:10}}>
+            <li class="list-group-item list-group-item-action list-group-item-primary"><b>ELEMENT</b></li>
             {elements.map((element, index) => (
                 <li class="list-group-item d-flex justify-content-between align-items-center" key={index}>
                     {element}
