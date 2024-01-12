@@ -3,7 +3,9 @@ import'bootstrap/dist/css/bootstrap.min.css';
 
 const ResultBox = () => {
     return (
-        <div class="card" style={{margin:10}}> 결과창 </div>
+        <div className="card" style={{marginTop:20, marginBottom:20}}>
+            <div className="card-body">결과창</div>
+        </div>
     )
 }
 export default ResultBox;

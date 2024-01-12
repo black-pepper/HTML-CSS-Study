@@ -18,24 +18,24 @@ const ElementList = () => {
     };
 
     return (
-        <div class="list-group" style={{margin:10}}>
-            <li class="list-group-item list-group-item-action list-group-item-primary"><b>ELEMENT</b></li>
+        <div className="list-group">
+            <li className="list-group-item list-group-item-action list-group-item-primary"><b>ELEMENT</b></li>
             {elements.map((element, index) => (
-                <li class="list-group-item d-flex justify-content-between align-items-center" key={index}>
+                <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
                     {element}
-                        <button  type="button" class="btn-close" aria-label="Close" onClick={() => handleTagRemove(index)}></button>
+                        <button  type="button" className="btn-close" aria-label="Close" onClick={() => handleTagRemove(index)}></button>
                 </li>
             ))}
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add Tag
             </button>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Select Tag</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Select Tag</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <SelectTagList onTagSelect={handleTagSelect} />

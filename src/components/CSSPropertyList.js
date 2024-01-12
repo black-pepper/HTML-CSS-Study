@@ -3,11 +3,11 @@ import'bootstrap/dist/css/bootstrap.min.css';
 
 const CSSPropertyList = () => {
     return (
-        <div class="list-group" style={{margin:10}}>
-            <li class="list-group-item list-group-item-action list-group-item-primary"><b>CSS PROPERTY</b></li>
+        <div className="list-group">
+            <li className="list-group-item list-group-item-action list-group-item-primary"><b>CSS PROPERTY</b></li>
             {propertys.map((property, index) => (
-                <li class="list-group-item d-flex justify-content-between align-items-center" key={index}>
-                    {property}
+                <li className="list-group-item d-flex justify-content-between align-items-center" key={index} style={{ whiteSpace: 'nowrap' }}>
+                    {property}:<input className="form-control form-control-sm" style={{ marginLeft: 10 }}></input>
                 </li>
             ))}
         </div>

@@ -8,7 +8,7 @@ const SelectTagList = ({ onTagSelect }) => {
   };
 
     return (
-      <div className="list-group" style={{ margin: 10 }}>
+      <div className="list-group">
         {TagType.map((tagType, index) => (
           <button 
             className="list-group-item list-group-item-action" 

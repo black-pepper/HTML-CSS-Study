@@ -9,16 +9,16 @@ import CSSPropertyList from './components/CSSPropertyList';
 
 const Main = () => {
     return (
-        <div class="container">
+        <div className="container">
             <ResultBox/>
-            <div class="row">
-                <div class="col">
+            <div className="row">
+                <div className="col">
                     <HTMLPropertyList/>
                 </div>
-                <div class="col">
+                <div className="col">
                     <CSSPropertyList/>
                 </div>
-                <div class="col">
+                <div className="col">
                     <ElementList/>
                 </div>
             </div>
