@@ -8,6 +8,13 @@ import CSSPropertyList from './components/CSSPropertyList';
 
 
 const Main = () => {
+    const [tagData, setTagData] = useState([]);
+
+    const updateHTMLProperties = (index, properties) => {
+      };
+    const updateCSSProperties = (index, properties) => {
+      };
+
     return (
         <div className="container">
             <ResultBox/>
