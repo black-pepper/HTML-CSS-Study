@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import'bootstrap/dist/css/bootstrap.min.css';
 
-const CSSPropertyList = () => {
+const CSSPropertyList = ({tagData, updateCSSProperties}) => {
     return (
         <div className="card">
-            <div class="card-header">
+            <div className="card-header">
                 <b>CSS PROPERTY</b>
             </div>
             <div className="list-group list-group-flush">

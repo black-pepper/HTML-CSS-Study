@@ -9,24 +9,32 @@ import CSSPropertyList from './components/CSSPropertyList';
 
 const Main = () => {
     const [tagData, setTagData] = useState([]);
+    const [selectedElement, setSelectedElement] = useState(null);
 
-    const updateHTMLProperties = (index, properties) => {
-      };
-    const updateCSSProperties = (index, properties) => {
-      };
+    const updateHTMLProperties = (index, newHtmlProperty) => {
+    };
+    const updateCSSProperties = (index, newCssProperty) => {
+    };
+    const addTagData = (tagType) => {
+        setTagData([...tagData, {tag:tagType, htmlProperty:{}, cssProperty:{}}]);
+    }
+    const removeTagData = (indexToRemove) => {
+        const updatedTagData = tagData.filter((_, index) => index !== indexToRemove);
+        setTagData(updatedTagData);
+    };
 
     return (
         <div className="container">
             <ResultBox/>
             <div className="row">
                 <div className="col">
-                    <HTMLPropertyList/>
+                    <HTMLPropertyList tagData={tagData} updateHTMLProperties={updateHTMLProperties}/>
                 </div>
                 <div className="col">
-                    <CSSPropertyList/>
+                    <CSSPropertyList tagData={tagData} updateCSSProperties={updateCSSProperties}/>
                 </div>
                 <div className="col">
-                    <ElementList/>
+                    <ElementList tagData={tagData} AddTagData={addTagData} removeTagData={removeTagData} selectedElement={selectedElement} setSelectedElement={setSelectedElement}/>
                 </div>
             </div>
         </div>

@@ -4,42 +4,34 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 import SelectTagList from './SelectTagList';
 
-const ElementList = () => {
+const ElementList = ({tagData, AddTagData, removeTagData, selectedElement, setSelectedElement}) => {
     
-    const [elements, setElements] = useState([]);
-    const [selectedElement, setSelectedElement] = useState(null);
-
-    const handleTagSelect = (tagType) => {
-        setElements([...elements, tagType]);
+    const handleTagDataSelect = (index) => {
+        setSelectedElement(index);
     };
 
-    const handleTagRemove = (indexToRemove) => {
-        const updatedElements = elements.filter((_, index) => index !== indexToRemove);
-        setElements(updatedElements);
-    };
-
-      const handleElementSelect = (index) => {
-        setSelectedElement(elements[index]);
-      };
+    const handleTagAdd = (tagType) =>{
+        AddTagData(tagType);
+    }
 
     return (
         <div className="card">
-            <div class="card-header">
+            <div className="card-header">
                 <b>ELEMENT</b>
             </div>
         <div className="list-group list-group-flush">
-            {elements.map((element, index) => (
+            {tagData.map((item, index) => (
                 <button 
-                    className="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
+                    className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ${selectedElement === index ? 'active' : ''}`}  
                     key={index}
-                    onClick={() => handleElementSelect(index)}
+                    onClick={() => handleTagDataSelect(index)}
                 >
-                    {element}
+                    {item.tag}
                     <button
                         type="button"
                         className="btn-close"
                         aria-label="Close"
-                        onClick={() => handleTagRemove(index)}>
+                        onClick={() => removeTagData(index)}>
                     </button>
                 </button>
             ))}
@@ -54,7 +46,7 @@ const ElementList = () => {
 
             <div className="modal fade"
                 id="addTag"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-hidden="true"
             >
                 <div className="modal-dialog">
@@ -69,7 +61,7 @@ const ElementList = () => {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <SelectTagList onTagSelect={handleTagSelect} />
+                            <SelectTagList onTagSelect={handleTagAdd} />
                         </div>
                     </div>
                 </div>
