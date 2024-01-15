@@ -6,14 +6,41 @@ import HTMLPropertyList from './components/HTMLPropertyList';
 import ElementList from './components/ElementList';
 import CSSPropertyList from './components/CSSPropertyList';
 
-
 const Main = () => {
     const [tagData, setTagData] = useState([]);
     const [selectedElement, setSelectedElement] = useState(null);
 
     const updateHTMLProperties = (index, newHtmlProperty) => {
+        setTagData((prevTagData) => {
+            const updatedTagData = [...prevTagData];
+            // Ensure the index is valid
+            if (index >= 0 && index < updatedTagData.length) {
+              updatedTagData[index] = {
+                ...updatedTagData[index],
+                htmlProperty: {
+                  ...updatedTagData[index].htmlProperty,
+                  ...newHtmlProperty,
+                },
+              };
+            }
+            return updatedTagData;
+          });
     };
     const updateCSSProperties = (index, newCssProperty) => {
+        setTagData((prevTagData) => {
+            const updatedTagData = [...prevTagData];
+            // Ensure the index is valid
+            if (index >= 0 && index < updatedTagData.length) {
+              updatedTagData[index] = {
+                ...updatedTagData[index],
+                cssProperty: {
+                  ...updatedTagData[index].cssProperty,
+                  ...newCssProperty,
+                },
+              };
+            }
+            return updatedTagData;
+          });
     };
     const addTagData = (tagType) => {
         setTagData([...tagData, {tag:tagType, htmlProperty:{}, cssProperty:{}}]);
@@ -28,10 +55,10 @@ const Main = () => {
             <ResultBox/>
             <div className="row">
                 <div className="col">
-                    <HTMLPropertyList tagData={tagData} updateHTMLProperties={updateHTMLProperties}/>
+                    <HTMLPropertyList tagData={tagData} updateHTMLProperties={updateHTMLProperties} selectedElement={selectedElement}/>
                 </div>
                 <div className="col">
-                    <CSSPropertyList tagData={tagData} updateCSSProperties={updateCSSProperties}/>
+                    <CSSPropertyList tagData={tagData} updateCSSProperties={updateCSSProperties} selectedElement={selectedElement}/>
                 </div>
                 <div className="col">
                     <ElementList tagData={tagData} AddTagData={addTagData} removeTagData={removeTagData} selectedElement={selectedElement} setSelectedElement={setSelectedElement}/>

@@ -10,7 +10,11 @@ const CSSPropertyList = ({tagData, updateCSSProperties}) => {
             <div className="list-group list-group-flush">
                 {propertys.map((property, index) => (
                     <li className="list-group-item d-flex justify-content-between align-items-center" key={index} style={{ whiteSpace: 'nowrap' }}>
-                        {property}:<input className="form-control form-control-sm" style={{ marginLeft: 10 }}></input>
+                        {property}:
+                        <input 
+                            className="form-control form-control-sm"
+                            style={{ marginLeft: 10 }}>
+                        </input>
                     </li>
                 ))}
             </div>

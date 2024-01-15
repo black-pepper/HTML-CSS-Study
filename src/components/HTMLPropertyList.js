@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import'bootstrap/dist/css/bootstrap.min.css';
 
-const HTMLPropertyList = ({tagData, updateHTMLProperties}) => {
+const HTMLPropertyList = ({tagData, updateHTMLProperties, selectedElement}) => {
+    const getData = (property) => {
+        if (selectedElement == null) return null;
+    }
     return (
         <div className="card">
             <div className="card-header">
@@ -13,7 +16,14 @@ const HTMLPropertyList = ({tagData, updateHTMLProperties}) => {
                 </li>
                 {propertys.map((property, index) => (
                     <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
-                        {property}:<input className="form-control form-control-sm" style={{marginLeft:10}}></input>
+                        {property}:
+                        <input 
+                            className="form-control form-control-sm"
+                            style={{marginLeft:10}}
+                            onChange={(event) => updateHTMLProperties(selectedElement, { [property]: event.target.value })}
+                        >
+                            {getData(property)}
+                        </input>
                     </li>
                 ))}
             </ul>
