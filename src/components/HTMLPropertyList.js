@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import'bootstrap/dist/css/bootstrap.min.css';
 
-const HTMLPropertyList = ({tagData, updateHTMLProperties, selectedElement}) => {
+const HTMLPropertyList = ({HTMLProperty, updateHTMLProperties, selectedIndex}) => {
     const getData = (property) => {
-        if (selectedElement == null) return null;
+        if (selectedIndex == null) return null;
+        if (HTMLProperty == null) return null;
+        if (property in HTMLProperty) return HTMLProperty[property];
+        return null;
     }
     return (
         <div className="card">
-            <div className="card-header">
+            <div className="card-header" id={selectedIndex}>
                 <b>HTML PROPERTY</b>
             </div>
             <ul className="list-group list-group-flush">
+                <li className="list-group-item list-group-item-secondary" key="-2">
+                    selectedIndex: {selectedIndex}
+                </li>
                 <li className="list-group-item list-group-item-secondary" key="-1">
                     <input className="form-control form-control-sm" placeholder="content"></input>
                 </li>
@@ -20,10 +26,9 @@ const HTMLPropertyList = ({tagData, updateHTMLProperties, selectedElement}) => {
                         <input 
                             className="form-control form-control-sm"
                             style={{marginLeft:10}}
-                            onChange={(event) => updateHTMLProperties(selectedElement, { [property]: event.target.value })}
-                        >
-                            {getData(property)}
-                        </input>
+                            onChange={(event) => updateHTMLProperties(selectedIndex, { [property]: event.target.value })}
+                            value={getData(property) || ''}
+                        />
                     </li>
                 ))}
             </ul>

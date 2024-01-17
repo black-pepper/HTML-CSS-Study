@@ -4,10 +4,10 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 import SelectTagList from './SelectTagList';
 
-const ElementList = ({tagData, AddTagData, removeTagData, selectedElement, setSelectedElement}) => {
+const ElementList = ({tagData, AddTagData, removeTagData, selectedIndex, setSelectedIndex}) => {
     
     const handleTagDataSelect = (index) => {
-        setSelectedElement(index);
+        setSelectedIndex(index);
     };
 
     const handleTagAdd = (tagType) =>{
@@ -22,7 +22,7 @@ const ElementList = ({tagData, AddTagData, removeTagData, selectedElement, setSe
         <div className="list-group list-group-flush">
             {tagData.map((item, index) => (
                 <button 
-                    className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ${selectedElement === index ? 'active' : ''}`}  
+                    className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ${selectedIndex === index ? 'active' : ''}`}  
                     key={index}
                     onClick={() => handleTagDataSelect(index)}
                 >

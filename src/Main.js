@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import'bootstrap/dist/css/bootstrap.min.css';
 
 import ResultBox from './components/ResultBox';
@@ -8,7 +8,20 @@ import CSSPropertyList from './components/CSSPropertyList';
 
 const Main = () => {
     const [tagData, setTagData] = useState([]);
+    const [selectedIndex, setSelectedIndex] = useState(null);
     const [selectedElement, setSelectedElement] = useState(null);
+
+    useEffect(() => {
+      // Fetch the selectedElement using selectedIndex
+      const selectedElement = tagData[selectedIndex];
+      // Handle the selectedElement as needed (e.g., updating HTML properties)
+      console.log('Selected Element:', selectedElement);
+    }, [selectedIndex, tagData]);
+
+    const updateSeletedIndex = (index) => {
+      setSelectedIndex(index);
+      setSelectedElement(tagData[index]);
+    }
 
     const updateHTMLProperties = (index, newHtmlProperty) => {
         setTagData((prevTagData) => {
@@ -25,6 +38,8 @@ const Main = () => {
             }
             return updatedTagData;
           });
+          console.log(tagData);
+          setSelectedElement(tagData[index]);
     };
     const updateCSSProperties = (index, newCssProperty) => {
         setTagData((prevTagData) => {
@@ -55,13 +70,24 @@ const Main = () => {
             <ResultBox/>
             <div className="row">
                 <div className="col">
-                    <HTMLPropertyList tagData={tagData} updateHTMLProperties={updateHTMLProperties} selectedElement={selectedElement}/>
+                    <HTMLPropertyList 
+                      tagData={selectedElement}
+                      updateHTMLProperties={updateHTMLProperties} 
+                      selectedIndex={selectedIndex}/>
                 </div>
                 <div className="col">
-                    <CSSPropertyList tagData={tagData} updateCSSProperties={updateCSSProperties} selectedElement={selectedElement}/>
+                    <CSSPropertyList 
+                      tagData={tagData} 
+                      updateCSSProperties={updateCSSProperties} 
+                      selectedIndex={selectedIndex}/>
                 </div>
                 <div className="col">
-                    <ElementList tagData={tagData} AddTagData={addTagData} removeTagData={removeTagData} selectedElement={selectedElement} setSelectedElement={setSelectedElement}/>
+                    <ElementList 
+                      tagData={tagData} 
+                      AddTagData={addTagData} 
+                      removeTagData={removeTagData} 
+                      selectedIndex={selectedIndex} 
+                      setSelectedIndex={updateSeletedIndex}/>
                 </div>
             </div>
         </div>
