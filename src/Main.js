@@ -44,9 +44,8 @@ const Main = () => {
   
   const updateCSSProperties = (index, newCssProperty) => {
     setTagData((prevTagData) => {
-      const updatedTagData = [...prevTagData];
-      // Ensure the index is valid
-      if (index >= 0 && index < updatedTagData.length) {
+      if (index >= 0 && index < prevTagData.length) {
+        const updatedTagData = [...prevTagData];
         updatedTagData[index] = {
           ...updatedTagData[index],
           cssProperty: {
@@ -54,8 +53,10 @@ const Main = () => {
             ...newCssProperty,
           },
         };
+        setTagData(updatedTagData);
+        setSelectedElement(updatedTagData[index]);
       }
-      return updatedTagData;
+      return prevTagData;
     });
   };
   const addTagData = (tagType) => {
@@ -68,7 +69,9 @@ const Main = () => {
 
   return (
     <div className="container">
-      <ResultBox />
+      <ResultBox 
+        tagData={tagData}
+      />
       <div className="row">
         <div className="col">
           <HTMLPropertyList
@@ -78,7 +81,7 @@ const Main = () => {
         </div>
         <div className="col">
           <CSSPropertyList
-            tagData={tagData}
+            selectedElement={selectedElement}
             updateCSSProperties={updateCSSProperties}
             selectedIndex={selectedIndex} />
         </div>

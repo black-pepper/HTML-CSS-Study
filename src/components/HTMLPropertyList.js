@@ -10,8 +10,16 @@ const HTMLPropertyList = ({ selectedElement, updateHTMLProperties, selectedIndex
 		return null;
 	}
 
+	const getpropertys = (selectedElement) => {
+    if (selectedElement == null) return [];
+		switch(selectedElement.tag) {
+			case 'a': return ["href", "target"];
+			default: return [];
+		  }
+	}
+
 	return (
-		<div className="card">
+		<div className="card h-50">
 			<div className="card-header" id={selectedIndex}>
 				<b>HTML PROPERTY</b>
 			</div>
@@ -24,7 +32,7 @@ const HTMLPropertyList = ({ selectedElement, updateHTMLProperties, selectedIndex
             value={getData("content") || ''}
           />
 				</li>
-				{propertys.map((property, index) => (
+				{getpropertys(selectedElement).map((property, index) => (
 					<li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
 						{property}:
 						<input
