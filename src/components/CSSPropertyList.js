@@ -11,7 +11,7 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
 	}
 
   return (
-    <div className="card h-50">
+    <div className="card" style={{ height: '280px', marginTop: 20}}>
       <div className="card-header">
         <b>CSS PROPERTY</b>
       </div>

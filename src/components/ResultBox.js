@@ -31,7 +31,7 @@ const ResultBox = ({ tagData }) => {
   };
 
   return (
-    <div className="card" style={{ marginTop: 20, marginBottom: 20 }}>
+    <div className="card" style={{ marginTop: 20 }}>
       <div className="card-body" dangerouslySetInnerHTML={{ __html: getResult() }} />
       <div class="card-footer text-body-secondary">
         {getResult()}

@@ -72,7 +72,7 @@ const Main = () => {
       <ResultBox 
         tagData={tagData}
       />
-      <div className="row">
+      <div className="row h-50">
         <div className="col">
           <HTMLPropertyList
             selectedElement={selectedElement}
@@ -94,6 +94,7 @@ const Main = () => {
             setSelectedIndex={updateSeletedIndex} />
         </div>
       </div>
+      <footer class="py-3 mt-auto"></footer>
     </div>
   )
 }

@@ -16,7 +16,7 @@ const ElementList = ({ tagData, AddTagData, removeTagData, selectedIndex, setSel
   }
 
   return (
-    <div className="card h-50">
+    <div className="card"style={{ height: '280px', marginTop: 20}}>
       <div className="card-header">
         <b>ELEMENT</b>
       </div>
