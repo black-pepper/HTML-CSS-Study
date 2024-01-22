@@ -16,7 +16,6 @@ const Main = () => {
     // Fetch the selectedElement using selectedIndex
     const selectedElement = tagData[selectedIndex];
     // Handle the selectedElement as needed (e.g., updating HTML properties)
-    console.log('Selected Element:', selectedElement);
   }, [selectedIndex, tagData]);
 
   const updateSeletedIndex = (index) => {
@@ -63,6 +62,11 @@ const Main = () => {
     setTagData([...tagData, { tag: tagType, htmlProperty: {}, cssProperty: {} }]);
   }
   const removeTagData = (indexToRemove) => {
+    debugger;
+    if(indexToRemove===selectedIndex){
+      setSelectedElement(null);
+      setSelectedIndex(null);
+    }
     const updatedTagData = tagData.filter((_, index) => index !== indexToRemove);
     setTagData(updatedTagData);
   };
@@ -94,7 +98,7 @@ const Main = () => {
             setSelectedIndex={updateSeletedIndex} />
         </div>
       </div>
-      <footer class="py-3 mt-auto"></footer>
+      <footer className="py-3 mt-auto"></footer>
     </div>
   )
 }

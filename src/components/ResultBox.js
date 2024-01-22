@@ -20,7 +20,7 @@ const ResultBox = ({ tagData }) => {
       if(!(Object.keys(cssProperty).length===0)) { 
         result += ` style="`;
         Object.entries(cssProperty).forEach(([key, value]) => {
-          result += `${key}:${value};`;
+          if(value) result += `${key}:${value};`;
         });
         result += `">${(htmlProperty.content)?htmlProperty.content:''}</${tag}>\n`; // 태그 닫기
       } else {
@@ -33,7 +33,7 @@ const ResultBox = ({ tagData }) => {
   return (
     <div className="card" style={{ marginTop: 20 }}>
       <div className="card-body" dangerouslySetInnerHTML={{ __html: getResult() }} />
-      <div class="card-footer text-body-secondary">
+      <div className="card-footer text-body-secondary">
         {getResult()}
       </div>
     </div>

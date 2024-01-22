@@ -10,6 +10,28 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
 		return null;
 	}
 
+  const getInputClassName = (property) => {
+    switch (property) {
+      case "color": case "background-color": return "form-control form-control-color";
+      default: return "form-control form-control-sm";
+    }
+  }
+
+  const getInputType = (property) => {
+    switch (property) {
+      case "color": case "background-color": return "color";
+      default: return null;
+    }
+  }
+
+  const getOptions = (property) => {
+    switch (property) {
+      case "display": return [null, "none", "block", "inline", "inline-block"];
+      case "text-align": return [null, "left", "right", "center", "justify"];
+      default: return null;
+    }
+  }
+
   return (
     <div className="card" style={{ height: '280px', marginTop: 20}}>
       <div className="card-header">
@@ -19,17 +41,33 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
         {properties.map((property, index) => (
           <li className="list-group-item d-flex justify-content-between align-items-center" key={index} style={{ whiteSpace: 'nowrap' }}>
             {property}:
-            <input
-              className="form-control form-control-sm"
-              style={{ marginLeft: 10 }}
-              onChange={(event) => updateCSSProperties(selectedIndex, { [property]: event.target.value })}
-							value={getData(property) || ''}
-            />
+            {(getOptions(property)) ? (
+              <select
+                className= "form-select form-select-sm"
+                disabled={!selectedElement}
+                style={{ marginLeft: 10 }}
+                onChange={(event) => updateCSSProperties(selectedIndex, { [property]: event.target.value })}
+                value={getData(property) || ''}
+              >
+                {getOptions(property).map((option, index) => (
+                  <option value={option} key={index}>{option}</option>
+                ))}
+              </select>
+            ) : (
+              <input
+                className={getInputClassName(property)}
+                type={getInputType(property)}
+                disabled={!selectedElement}
+                style={{ marginLeft: 10 }}
+                onChange={(event) => updateCSSProperties(selectedIndex, { [property]: event.target.value })}
+                value={getData(property) || ''}
+              />
+            )}
           </li>
         ))}
       </div>
     </div>
-  )
+  );
 }
 export default CSSPropertyList;
 
