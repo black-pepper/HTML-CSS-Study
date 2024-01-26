@@ -26,5 +26,5 @@ const SelectTagList = ({ onTagSelect }) => {
 export default SelectTagList;
 
 const TagType = [
-    "div", "section", "article", "nav", "a", "br"
+    "div", "section", "article", "nav", "span", "p", "a", "br"
 ]

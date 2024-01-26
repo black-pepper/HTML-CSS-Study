@@ -38,7 +38,7 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
         <b>CSS PROPERTY</b>
       </div>
       <div className="list-group list-group-flush overflow-auto">
-        {properties.map((property, index) => (
+        {defaultProperties.map((property, index) => (
           <li className="list-group-item d-flex justify-content-between align-items-center" key={index} style={{ whiteSpace: 'nowrap' }}>
             {property}:
             {(getOptions(property)) ? (
@@ -71,5 +71,6 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
 }
 export default CSSPropertyList;
 
-const properties = ["color", "font-size", "font-family", "margin", "padding", "border", "background-color", "text-align", "display", "width", "height"]
+const defaultProperties = ["color", "font-size", "font-family", "margin", "padding", "border", "background-color", "text-align", "display", "width", "height"]
+const properties = ["position", "float", "clear", "border-radius", "box-shadow", "transition", "flex"]
 // const propertys = ["font-size", "font-weight", "color", "letter-spacing", "display", "border"];
