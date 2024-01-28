@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ResultBox from './components/ResultBox';
@@ -7,68 +7,42 @@ import ElementList from './components/ElementList';
 import CSSPropertyList from './components/CSSPropertyList';
 
 const Main = () => {
-  const [tagData, setTagData] = useState([]);
+  let tagData = useRef([]);
+  const [tagList, setTagList] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedElement, setSelectedElement] = useState(null);
 
 
   useEffect(() => {
-    // Fetch the selectedElement using selectedIndex
-    const selectedElement = tagData[selectedIndex];
-    // Handle the selectedElement as needed (e.g., updating HTML properties)
-  }, [selectedIndex, tagData]);
+  }, [tagList, selectedIndex, selectedElement]);
 
   const updateSeletedIndex = (index) => {
     setSelectedIndex(index);
-    setSelectedElement(tagData[index]);
+    setSelectedElement(tagData.current[index]);
   }
 
-  const updateHTMLProperties = (index, newHtmlProperty) => {
-    setTagData((prevTagData) => {
-      if (index >= 0 && index < prevTagData.length) {
-        const updatedTagData = [...prevTagData];
-        updatedTagData[index] = {
-          ...updatedTagData[index],
-          htmlProperty: {
-            ...updatedTagData[index].htmlProperty,
-            ...newHtmlProperty,
-          },
-        };
-        setTagData(updatedTagData);
-        setSelectedElement(updatedTagData[index]);
-      }
-      return prevTagData;
-    });
+  const updateHTMLProperties = (index, type, value) => {
+    tagData.current[index].htmlProperty[type]=value;
+    setSelectedElement(JSON.parse(JSON.stringify(tagData.current[index])));
   };
   
-  const updateCSSProperties = (index, newCssProperty) => {
-    setTagData((prevTagData) => {
-      if (index >= 0 && index < prevTagData.length) {
-        const updatedTagData = [...prevTagData];
-        updatedTagData[index] = {
-          ...updatedTagData[index],
-          cssProperty: {
-            ...updatedTagData[index].cssProperty,
-            ...newCssProperty,
-          },
-        };
-        setTagData(updatedTagData);
-        setSelectedElement(updatedTagData[index]);
-      }
-      return prevTagData;
-    });
+  const updateCSSProperties = (index, type, value) => {
+    tagData.current[index].cssProperty[type]=value;
+    setSelectedElement(JSON.parse(JSON.stringify(tagData.current[index])));
   };
+
   const addTagData = (tagType) => {
-    setTagData([...tagData, { tag: tagType, htmlProperty: {}, cssProperty: {} }]);
+    tagData.current.push({ tag: tagType, htmlProperty: {}, cssProperty: {} })
+    setTagList(tagData.current.map(item => item.tag));
   }
+
   const removeTagData = (indexToRemove) => {
-    debugger;
     if(indexToRemove===selectedIndex){
       setSelectedElement(null);
       setSelectedIndex(null);
     }
-    const updatedTagData = tagData.filter((_, index) => index !== indexToRemove);
-    setTagData(updatedTagData);
+    tagData.current.splice(indexToRemove, 1);
+    setTagList(tagData.current.map(item => item.tag));
   };
 
   return (
@@ -91,7 +65,7 @@ const Main = () => {
         </div>
         <div className="col">
           <ElementList
-            tagData={tagData}
+            tagList={tagList}
             AddTagData={addTagData}
             removeTagData={removeTagData}
             selectedIndex={selectedIndex}

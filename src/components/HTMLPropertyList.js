@@ -29,7 +29,7 @@ const HTMLPropertyList = ({ selectedElement, updateHTMLProperties, selectedIndex
             className="form-control form-control-sm"
             disabled={(selectedElement)?false:true}
             placeholder="content"
-            onChange={(event) => updateHTMLProperties(selectedIndex, { ["content"]: event.target.value })}
+            onChange={(event) => updateHTMLProperties(selectedIndex, "content", event.target.value )}
             value={getData("content") || ''}
           />
         </li>

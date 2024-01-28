@@ -39,14 +39,17 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
       </div>
       <div className="list-group list-group-flush overflow-auto">
         {defaultProperties.map((property, index) => (
-          <li className="list-group-item d-flex justify-content-between align-items-center" key={index} style={{ whiteSpace: 'nowrap' }}>
+          <li 
+            className="list-group-item d-flex justify-content-between align-items-center" 
+            key={index} 
+            style={{ whiteSpace: 'nowrap' }}>
             {property}:
             {(getOptions(property)) ? (
               <select
                 className= "form-select form-select-sm"
                 disabled={!selectedElement}
                 style={{ marginLeft: 10 }}
-                onChange={(event) => updateCSSProperties(selectedIndex, { [property]: event.target.value })}
+                onChange={(event) => updateCSSProperties(selectedIndex, property, event.target.value )}
                 value={getData(property) || ''}
               >
                 {getOptions(property).map((option, index) => (
@@ -59,7 +62,7 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
                 type={getInputType(property)}
                 disabled={!selectedElement}
                 style={{ marginLeft: 10 }}
-                onChange={(event) => updateCSSProperties(selectedIndex, { [property]: event.target.value })}
+                onChange={(event) => updateCSSProperties(selectedIndex, property, event.target.value )}
                 value={getData(property) || ''}
               />
             )}

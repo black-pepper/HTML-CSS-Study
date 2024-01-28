@@ -3,13 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ResultBox = ({ tagData }) => {
   const getResult = () => {
-    if (tagData == null) return null;
+    if (tagData.current == null) return null;
 
     // 결과를 저장할 변수
     let result = '';
 
     // tagData를 순회하며 HTML 문자열 생성
-    tagData.forEach(({ tag, htmlProperty, cssProperty }) => {
+    tagData.current.forEach(({ tag, htmlProperty, cssProperty }) => {
       // 각 태그와 속성에 맞게 HTML 코드 추가
       result += `<${tag}`;
       // HTML 속성 추가
