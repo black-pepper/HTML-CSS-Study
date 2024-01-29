@@ -5,6 +5,7 @@ import ResultBox from './components/ResultBox';
 import HTMLPropertyList from './components/HTMLPropertyList';
 import ElementList from './components/ElementList';
 import CSSPropertyList from './components/CSSPropertyList';
+import TagData from './dto/TagData';
 
 const Main = () => {
   let tagData = useRef([]);
@@ -32,7 +33,7 @@ const Main = () => {
   };
 
   const addTagData = (tagType) => {
-    tagData.current.push({ tag: tagType, htmlProperty: {}, cssProperty: {} })
+    tagData.current.push(new TagData(tagType, 0));
     setTagList(tagData.current.map(item => item.tag));
   }
 
