@@ -32,8 +32,12 @@ const Main = () => {
     setSelectedElement(JSON.parse(JSON.stringify(tagData.current[index])));
   };
 
-  const addTagData = (tagType) => {
-    tagData.current.push(new TagData(tagType, 0));
+  const addTagData = (tagType, index) => {
+    if(index === -1) {
+      tagData.current.push(new TagData(tagType, 0));
+    } else {
+      tagData.current.push(new TagData(tagType, tagData.current[index].depth+1))
+    }
     setTagList(tagData.current.map(item => item.tag));
   }
 

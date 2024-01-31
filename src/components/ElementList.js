@@ -12,7 +12,11 @@ const ElementList = ({ tagList, AddTagData, removeTagData, selectedIndex, setSel
   };
 
   const handleTagAdd = (tagType) => {
-    AddTagData(tagType);
+    AddTagData(tagType, -1);
+  }
+
+  const handleSubTagAdd = (tagType) => {
+    AddTagData(tagType, selectedIndex);
   }
 
   return (
@@ -29,27 +33,37 @@ const ElementList = ({ tagList, AddTagData, removeTagData, selectedIndex, setSel
             onClick={() => handleTagDataSelect(index)}
           >
             {item}
-            <button
+            <div
               type="button"
               className="btn-close"
               aria-label="Close"
               onClick={() => removeTagData(index)}
             >
-            </button>
+            </div>
           </button>
         ))}
       </div>
       </div>
       <div className="card-footer" style={{padding:0}}>
+        <div className="btn-group" role="group" style={{width:'100%'}}> 
           <button
-            className="list-group-item"
+            className="list-group-item btn btn-secondary"
             data-bs-toggle="modal"
             data-bs-target="#addTag"
             style={{ width: '100%', padding:10}}
           >
             Add Tag
           </button>
-
+          <button
+            className="list-group-item btn btn-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#addSubTag"
+            style={{ width: '100%', padding:10}}
+            disabled={selectedIndex===null}
+          >
+            Add Sub Tag
+          </button>
+        </div>
         
         <div className="modal fade"
           id="addTag"
@@ -73,6 +87,30 @@ const ElementList = ({ tagList, AddTagData, removeTagData, selectedIndex, setSel
             </div>
           </div>
         </div>
+
+        <div className="modal fade"
+          id="addSubTag"
+          tabIndex="-1"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">Select Tag</h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">
+                </button>
+              </div>
+              <div className="modal-body">
+                <SelectTagList onTagSelect={handleSubTagAdd} />
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   )
