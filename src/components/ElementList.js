@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import SelectTagList from './SelectTagList';
 import { Block } from '@mui/icons-material';
 
-const ElementList = ({ tagList, AddTagData, removeTagData, selectedIndex, setSelectedIndex }) => {
+const ElementList = ({ tagData, tagList, AddTagData, removeTagData, selectedIndex, setSelectedIndex }) => {
 
   const handleTagDataSelect = (index) => {
     setSelectedIndex(index);
@@ -26,18 +26,18 @@ const ElementList = ({ tagList, AddTagData, removeTagData, selectedIndex, setSel
       </div>
       <div className='card-body overflow-auto' style={{padding:0}}>
       <div className="card-group list-group list-group-flush overflow-auto">
-        {tagList.map((item, index) => (
+        {tagList.map((item) => (
           <button
-            className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ${selectedIndex === index ? 'active' : ''}`}
-            key={index}
-            onClick={() => handleTagDataSelect(index)}
+            className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ${selectedIndex === item ? 'active' : ''}`}
+            key={item}
+            onClick={() => handleTagDataSelect(item)}
           >
-            {item}
+            {"└".repeat(tagData.current[item].depth)} {tagData.current[item].tag}
             <div
               type="button"
               className="btn-close"
               aria-label="Close"
-              onClick={() => removeTagData(index)}
+              onClick={() => removeTagData(item)}
             >
             </div>
           </button>

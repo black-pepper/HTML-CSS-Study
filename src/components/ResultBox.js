@@ -8,8 +8,10 @@ const ResultBox = ({ tagData }) => {
     // 결과를 저장할 변수
     let result = '';
 
-    // tagData를 순회하며 HTML 문자열 생성
-    tagData.current.forEach(({ tag, htmlProperty, cssProperty }) => {
+    const DFS = (target) => {
+      const tag = tagData.current[target].tag;
+      const htmlProperty = tagData.current[target].htmlProperty;
+      const cssProperty = tagData.current[target].cssProperty;
       // 각 태그와 속성에 맞게 HTML 코드 추가
       result += `<${tag}`;
       // HTML 속성 추가
@@ -22,11 +24,22 @@ const ResultBox = ({ tagData }) => {
         Object.entries(cssProperty).forEach(([key, value]) => {
           if(value) result += `${key}:${value};`;
         });
-        result += `">${(htmlProperty.content)?htmlProperty.content:''}</${tag}>\n`; // 태그 닫기
+        result += `">${(htmlProperty.content)?htmlProperty.content:''}`;
+          if (tagData.current[target] && tagData.current[target].children) {
+            for (const child of tagData.current[target].children) DFS(child);
+          }
+        result += `</${tag}>`; // 태그 닫기
       } else {
-        result += `>${(htmlProperty.content)?htmlProperty.content:''}</${tag}>\n`; // 태그 닫기
+        result += `>${(htmlProperty.content)?htmlProperty.content:''}`
+          if (tagData.current[target] && tagData.current[target].children) {
+            for (const child of tagData.current[target].children) DFS(child);
+          }
+        result += `</${tag}>`; // 태그 닫기
       }
-    });
+    }
+    for(let i=0; i<tagData.current.length; i++) {
+      if(tagData.current[i].depth == 0) DFS(i);
+    }
     return result;
   };
 

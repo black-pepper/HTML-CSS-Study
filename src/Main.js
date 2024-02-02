@@ -36,9 +36,10 @@ const Main = () => {
     if(index === -1) {
       tagData.current.push(new TagData(tagType, 0));
     } else {
-      tagData.current.push(new TagData(tagType, tagData.current[index].depth+1))
+      tagData.current[index].children.push(tagData.current.length);
+      tagData.current.push(new TagData(tagType, tagData.current[index].depth+1));
     }
-    setTagList(tagData.current.map(item => item.tag));
+    updateTagList();
   }
 
   const removeTagData = (indexToRemove) => {
@@ -47,8 +48,22 @@ const Main = () => {
       setSelectedIndex(null);
     }
     tagData.current.splice(indexToRemove, 1);
-    setTagList(tagData.current.map(item => item.tag));
+    updateTagList();
   };
+
+  const updateTagList = () => {
+    let result = [];
+    const DFS = (target) => {
+      result.push(target)
+      if (tagData.current[target] && tagData.current[target].children) {
+        for (const child of tagData.current[target].children) DFS(child);
+      }
+    }
+    for(let i=0; i<tagData.current.length; i++) {
+      if(tagData.current[i].depth == 0) DFS(i);
+    }
+    setTagList(result);
+  }
 
   return (
     <div className="container">
@@ -70,6 +85,7 @@ const Main = () => {
         </div>
         <div className="col">
           <ElementList
+            tagData={tagData}
             tagList={tagList}
             AddTagData={addTagData}
             removeTagData={removeTagData}
