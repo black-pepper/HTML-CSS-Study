@@ -37,7 +37,7 @@ const ResultBox = ({ tagData }) => {
         result += `</${tag}>`; // 태그 닫기
       }
     }
-    for(let i=0; i<tagData.current.length; i++) {
+    for(const i in tagData.current) {
       if(tagData.current[i].depth == 0) DFS(i);
     }
     return result;

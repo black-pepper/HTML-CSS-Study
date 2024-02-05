@@ -8,7 +8,8 @@ import CSSPropertyList from './components/CSSPropertyList';
 import TagData from './dto/TagData';
 
 const Main = () => {
-  let tagData = useRef([]);
+  let tagData = useRef({});
+  let endIndex = useRef(0); 
   const [tagList, setTagList] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedElement, setSelectedElement] = useState(null);
@@ -34,10 +35,10 @@ const Main = () => {
 
   const addTagData = (tagType, index) => {
     if(index === -1) {
-      tagData.current.push(new TagData(tagType, 0));
+      tagData.current[endIndex.current++] = new TagData(tagType, 0);
     } else {
-      tagData.current[index].children.push(tagData.current.length);
-      tagData.current.push(new TagData(tagType, tagData.current[index].depth+1));
+      tagData.current[index].children.push(endIndex.current);
+      tagData.current[endIndex.current++] = new TagData(tagType, tagData.current[index].depth+1);
     }
     updateTagList();
   }
@@ -47,7 +48,13 @@ const Main = () => {
       setSelectedElement(null);
       setSelectedIndex(null);
     }
-    tagData.current.splice(indexToRemove, 1);
+    const DFS = (target) => {
+      if (tagData.current[target] && tagData.current[target].children) {
+        for (const child of tagData.current[target].children) DFS(child);
+      }
+      delete tagData.current[target];
+    }
+    DFS(indexToRemove)
     updateTagList();
   };
 
@@ -59,7 +66,7 @@ const Main = () => {
         for (const child of tagData.current[target].children) DFS(child);
       }
     }
-    for(let i=0; i<tagData.current.length; i++) {
+    for(const i in tagData.current) {
       if(tagData.current[i].depth == 0) DFS(i);
     }
     setTagList(result);
