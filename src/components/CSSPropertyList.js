@@ -69,6 +69,16 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
           </li>
         ))}
       </div>
+      <div className="card-footer" style={{padding:0}}>
+        <div className="btn-group" role="group" style={{width:'100%'}}> 
+          <button
+            className="list-group-item btn btn-secondary"
+            style={{ width: '100%', padding:10}}
+          >
+            Add CSS property
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
