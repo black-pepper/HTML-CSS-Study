@@ -6,7 +6,7 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex})
 		if (selectedIndex == null) return null;
 		if (selectedElement == null) return null;
     if (!("cssProperty" in selectedElement)) return null;
-    if (property in selectedElement.cssProperty) return selectedElement.cssProperty[property];
+    if (property in selectedElement.cssProperty) return selectedElement.cssProperty[property].value;
 		return null;
 	}
 

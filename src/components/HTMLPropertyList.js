@@ -6,7 +6,7 @@ const HTMLPropertyList = ({ selectedElement, updateHTMLProperties, selectedIndex
     if (selectedIndex == null) return null;
     if (selectedElement == null) return null;
     if (!("htmlProperty" in selectedElement)) return null;
-    if (property in selectedElement.htmlProperty) return selectedElement.htmlProperty[property];
+    if (property in selectedElement.htmlProperty) return selectedElement.htmlProperty[property].value;
     return null;
   }
 
@@ -35,13 +35,13 @@ const HTMLPropertyList = ({ selectedElement, updateHTMLProperties, selectedIndex
           </li>
           {getpropertys(selectedElement).map((property, index) => (
             <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
-              {property}:
+              {property.value}:
               <input
                 className="form-control form-control-sm"
                 disabled={(selectedElement)?false:true}
                 style={{ marginLeft: 10 }}
-                onChange={(event) => updateHTMLProperties(selectedIndex, { [property]: event.target.value })}
-                value={getData(property) || ''}
+                onChange={(event) => updateHTMLProperties(selectedIndex, { [property.value]: event.target.value })}
+                value={getData(property.value) || ''}
               />
             </li>
           ))}

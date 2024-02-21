@@ -6,6 +6,7 @@ import HTMLPropertyList from './components/HTMLPropertyList';
 import ElementList from './components/ElementList';
 import CSSPropertyList from './components/CSSPropertyList';
 import TagData from './dto/TagData';
+import PropertyData from './dto/PropertyData';
 
 const Main = () => {
   let tagData = useRef({});
@@ -24,12 +25,18 @@ const Main = () => {
   }
 
   const updateHTMLProperties = (index, type, value) => {
-    tagData.current[index].htmlProperty[type]=value;
+    if (!tagData.current[index].htmlProperty[type]){
+      tagData.current[index].htmlProperty[type] = new PropertyData(value, 0);
+    }
+    tagData.current[index].htmlProperty[type].value = value;
     setSelectedElement(JSON.parse(JSON.stringify(tagData.current[index])));
   };
   
   const updateCSSProperties = (index, type, value) => {
-    tagData.current[index].cssProperty[type]=value;
+    if (!tagData.current[index].cssProperty[type]){
+      tagData.current[index].cssProperty[type] = new PropertyData(value, 0);
+    }
+    tagData.current[index].cssProperty[type].value = value;
     setSelectedElement(JSON.parse(JSON.stringify(tagData.current[index])));
   };
 

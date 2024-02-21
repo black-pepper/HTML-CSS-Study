@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { VpnLock } from '@mui/icons-material';
 
 const ResultBox = ({ tagData }) => {
   const getResult = () => {
@@ -22,15 +23,15 @@ const ResultBox = ({ tagData }) => {
       if(!(Object.keys(cssProperty).length===0)) { 
         result += ` style="`;
         Object.entries(cssProperty).forEach(([key, value]) => {
-          if(value) result += `${key}:${value};`;
+          if(value) result += `${key}:${value.value};`;
         });
-        result += `">${(htmlProperty.content)?htmlProperty.content:''}`;
+        result += `">${(htmlProperty.content)?htmlProperty.content.value:''}`;
           if (tagData.current[target] && tagData.current[target].children) {
             for (const child of tagData.current[target].children) DFS(child);
           }
         result += `</${tag}>`; // 태그 닫기
       } else {
-        result += `>${(htmlProperty.content)?htmlProperty.content:''}`
+        result += `>${(htmlProperty.content)?htmlProperty.content.value:''}`
           if (tagData.current[target] && tagData.current[target].children) {
             for (const child of tagData.current[target].children) DFS(child);
           }
