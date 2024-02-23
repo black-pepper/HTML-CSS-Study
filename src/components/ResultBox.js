@@ -17,7 +17,7 @@ const ResultBox = ({ tagData }) => {
       result += `<${tag}`;
       // HTML 속성 추가
       Object.entries(htmlProperty).forEach(([key, value]) => {
-        if(key!="content") result += ` ${key}="${value}"`;
+        if(key!="content") result += ` ${key}="${value.value}"`;
       });
       // CSS 속성 추가
       if(!(Object.keys(cssProperty).length===0)) { 

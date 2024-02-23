@@ -15,7 +15,6 @@ const Main = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedElement, setSelectedElement] = useState(null);
 
-
   useEffect(() => {
   }, [tagList, selectedIndex, selectedElement]);
 
