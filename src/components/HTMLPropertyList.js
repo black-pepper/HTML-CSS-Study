@@ -20,7 +20,7 @@ const HTMLPropertyList = ({ selectedElement, updateHTMLProperties, selectedIndex
     }
     if(selectedElement && selectedElement.htmlProperty) {
       Object.keys(selectedElement.htmlProperty).map((property) => (
-        result.add(property)
+        (property==="content")?null:result.add(property)
       ))
     }
     return Array.from(result);
@@ -35,7 +35,7 @@ const HTMLPropertyList = ({ selectedElement, updateHTMLProperties, selectedIndex
       <div className="card-header" id={selectedIndex}>
         <b>HTML PROPERTY</b>
       </div>
-      <div className="list-group list-group-flush overflow-auto">
+      <div className="card-body list-group list-group-flush overflow-auto" style={{padding:0}}>
           <li className="list-group-item list-group-item-secondary" key="-1">
             <input
               className="form-control form-control-sm"
@@ -66,6 +66,7 @@ const HTMLPropertyList = ({ selectedElement, updateHTMLProperties, selectedIndex
             data-bs-toggle="modal"
             data-bs-target="#addHTMLProperty"
             style={{ width: '100%', padding:10}}
+            disabled={selectedIndex===null}
           >
             Add HTML property
           </button>

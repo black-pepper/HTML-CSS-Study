@@ -92,6 +92,7 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex }
             data-bs-toggle="modal"
             data-bs-target="#addCSSProperty"
             style={{ width: '100%', padding: 10 }}
+            disabled={selectedIndex===null}
           >
             Add CSS property
           </button>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { VpnLock } from '@mui/icons-material';
 
 const ResultBox = ({ tagData }) => {
   const getResult = () => {
@@ -45,9 +44,9 @@ const ResultBox = ({ tagData }) => {
   };
 
   return (
-    <div className="card" style={{ marginTop: 20 }}>
+    <div className="card" style={{ marginTop: 20, minHeight: "150px"}}>
       <div className="card-body" dangerouslySetInnerHTML={{ __html: getResult() }} />
-      <div className="card-footer text-body-secondary">
+      <div className="card-footer text-body-secondary" style={{ minHeight: "40px"}}>
         {getResult()}
       </div>
     </div>
