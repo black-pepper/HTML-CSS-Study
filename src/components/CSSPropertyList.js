@@ -35,7 +35,6 @@ const CSSPropertyList = ({ selectedElement, updateCSSProperties, selectedIndex }
 
   const handlePropertyAdd = (property) => {
     updateCSSProperties(selectedIndex, property, null);
-    console.log(selectedElement);
   }
 
   const getPropertyList = () => {
