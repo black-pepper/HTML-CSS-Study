@@ -41,10 +41,10 @@ const Main = () => {
 
   const addTagData = (tagType, index) => {
     if(index === -1) {
-      tagData.current[endIndex.current++] = new TagData(tagType, 0);
+      tagData.current[endIndex.current++] = new TagData(tagType, 0, -1);
     } else {
       tagData.current[index].children.push(endIndex.current);
-      tagData.current[endIndex.current++] = new TagData(tagType, tagData.current[index].depth+1);
+      tagData.current[endIndex.current++] = new TagData(tagType, tagData.current[index].depth+1, index);
     }
     updateTagList();
   }
@@ -59,6 +59,10 @@ const Main = () => {
         for (const child of tagData.current[target].children) DFS(child);
       }
       delete tagData.current[target];
+    }
+    if(tagData.current[indexToRemove].parent !== -1) {
+      tagData.current[tagData.current[indexToRemove].parent].children
+        = tagData.current[tagData.current[indexToRemove].parent].children.filter((value) => value !== indexToRemove);
     }
     DFS(indexToRemove)
     updateTagList();
