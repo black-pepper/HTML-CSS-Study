@@ -18,9 +18,32 @@ const Main = () => {
   useEffect(() => {
   }, [tagList, selectedIndex, selectedElement]);
 
+  useEffect(() => {
+    // 로컬 스토리지에서 데이터를 가져와서 상태에 설정
+    const storedData = JSON.parse(localStorage.getItem('tagData'));
+    const storedEndIndex = JSON.parse(localStorage.getItem('endIndex'))
+    if (storedData) {
+      tagData.current = storedData;
+      endIndex.current = storedEndIndex;
+      updateSeletedIndex(null);
+      updateTagList();
+      console.log("use effect 실행", storedData);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tagData', JSON.stringify(tagData.current));
+    localStorage.setItem('endIndex', JSON.stringify(endIndex.current));
+  }, [selectedElement]);
+
   const updateSeletedIndex = (index) => {
-    setSelectedIndex(index);
-    setSelectedElement(tagData.current[index]);
+    if(index===null) {
+      setSelectedIndex(null);
+      setSelectedElement(null);
+    } else {
+      setSelectedIndex(index);
+      setSelectedElement(tagData.current[index]);
+    }
   }
 
   const updateHTMLProperties = (index, type, value) => {
@@ -82,8 +105,31 @@ const Main = () => {
     setTagList(result);
   }
 
+  const handleClearClick= () => {
+    //스토리지 비우기
+    localStorage.clear()
+    //리셋
+    tagData.current = {};
+    endIndex.current = 0; 
+    setTagList([]);
+    setSelectedIndex(null);
+    setSelectedElement(null);
+  }
+
   return (
     <div className="container">
+      <div className="row h-50">
+        <div className="col text-end">
+          <button
+          style={{marginTop:10}}
+          type="button"
+          className="btn btn-light"
+          onClick={handleClearClick}
+          >
+            CLEAR
+          </button>
+        </div>
+      </div>
       <ResultBox 
         tagData={tagData}
       />

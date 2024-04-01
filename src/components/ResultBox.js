@@ -44,7 +44,6 @@ const ResultBox = ({ tagData }) => {
   };
 
   const getTagResult = () => {
-    console.log(tagData);
     if (tagData.current == null) return null;
 
     // 결과를 저장할 변수
@@ -96,7 +95,7 @@ const ResultBox = ({ tagData }) => {
   }
 
   return (
-    <div className="card" style={{ marginTop: 20, minHeight: "150px"}}>
+    <div className="card" style={{ marginTop: 10, minHeight: "150px"}}>
       <div className="card-body" dangerouslySetInnerHTML={{ __html: getResult() }} />
       <div className="card-footer text-body-secondary" style={{ minHeight: "40px", whiteSpace:"pre"}}>
         {getTagResult()}
